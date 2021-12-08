@@ -1,15 +1,28 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
+const { Menu } = require('electron/main');
 const path = require('path')
+try {
+	require('electron-reloader')(module);
+} catch {}
 
 function createWindow () {
+  const { screen } = require('electron')
+  let display = screen.getPrimaryDisplay()
+  let width = display.bounds.width;
+  let height = display.bounds.height
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 400,
     height: 600,
+    x: width - 400,
+    y: height - 600 - 32,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    resizable: false,
+    frame: false,
+    transparent: true,
   })
 
   // and load the index.html of the app.
@@ -39,5 +52,6 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
+Menu.setApplicationMenu(null)
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

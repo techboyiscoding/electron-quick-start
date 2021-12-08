@@ -1,3 +1,19 @@
 /* styles.css */
 
+html{
+    height: 600px !important;
+}
+body {
+    margin: 0 0;
+}
+
+.container {
+    background: white;
+    border-radius: 10px !important;
+    height: 600px !important;
+    overflow: hidden !important;
+}
+
 /* Add styles here to customize the appearance of your app */
+   
+    
